@@ -47,9 +47,10 @@ dependencies {
     // Espresso dependencies
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.2.0'){
-        exclude group: 'androidx.appcompat', module: 'appcompat'
-        exclude group: 'androidx.legacy', module: 'legacy-support-v4'
-        exclude group: 'androidx.annotation', module: 'annotation'
+        exclude group: 'androidx.legacy', module: 'legacy-support-core-utils'
+        exclude group: 'androidx.documentfile', module: 'documentfile'
+        exclude group: 'androidx.localbroadcastmanager', module: 'localbroadcastmanager'
+        exclude group: 'androidx.print', module: 'print'
         exclude module: 'recyclerview'
     }
 

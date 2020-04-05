@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements MasterListFragmen
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             masterListFragment.setLayoutParams(params);
         }
+
+        if(getIntent().hasExtra(KEY_RECIPE_ID)){
+            RecipeEntry recipe = (RecipeEntry) getIntent().getSerializableExtra(KEY_RECIPE_ID);
+            onRecipeSelected(recipe);
+        }
     }
 
     private boolean isLandScapeMode() {

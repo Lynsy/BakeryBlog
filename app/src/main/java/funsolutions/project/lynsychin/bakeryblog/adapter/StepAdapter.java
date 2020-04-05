@@ -2,6 +2,8 @@ package funsolutions.project.lynsychin.bakeryblog.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -35,6 +38,8 @@ import funsolutions.project.lynsychin.bakeryblog.R;
 import funsolutions.project.lynsychin.bakeryblog.database.RecipeEntry;
 import funsolutions.project.lynsychin.bakeryblog.network.model.Ingredient;
 import funsolutions.project.lynsychin.bakeryblog.network.model.Step;
+
+import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -71,6 +76,12 @@ public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HeaderViewHolder){
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+
+            if(hasInternetConnection()){
+                headerViewHolder.lblIntenetError.setVisibility(View.GONE);
+            } else {
+                headerViewHolder.lblIntenetError.setVisibility(View.VISIBLE);
+            }
 
             if(mRecipe.getImage().isEmpty()){
                 headerViewHolder.imgRecipe.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ph_no_image));
@@ -168,6 +179,22 @@ public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    /**
+     * Taken from: https://www.tutorialspoint.com/how-to-check-internet-connection-availability-on-android
+     * @return true if there's a network connection
+     */
+    private boolean hasInternetConnection(){
+        boolean have_WIFI= false;
+        boolean have_MobileData = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)mContext.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+        for(NetworkInfo info:networkInfos){
+            if (info.getTypeName().equalsIgnoreCase("WIFI"))if (info.isConnected())have_WIFI=true;
+            if (info.getTypeName().equalsIgnoreCase("MOBILE DATA"))if (info.isConnected())have_MobileData=true;
+        }
+        return have_WIFI||have_MobileData;
+    }
+
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
@@ -183,6 +210,7 @@ public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.lblIntenetError) TextView lblIntenetError;
         @BindView(R.id.imgRecipe) ImageView imgRecipe;
         @BindView(R.id.lblServings) TextView tvServings;
         @BindView(R.id.tvRecipeName) TextView tvRecipeName;
@@ -211,10 +239,14 @@ public class StepAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public void onClick(View v) {
             String url = mData.get(getAdapterPosition()-1).getVideoURL();
-            if(!url.isEmpty()) {
+            if(!url.isEmpty() && hasInternetConnection()) {
                 Intent redirectToMedieIntent = new Intent(mContext, DisplayMediaActivity.class);
                 redirectToMedieIntent.putExtra(DisplayMediaActivity.KEY_MEDIA_URL, url);
                 mContext.startActivity(redirectToMedieIntent);
+            }
+
+            if(!hasInternetConnection()){
+                Toast.makeText(mContext, R.string.error_check_internet, Toast.LENGTH_SHORT).show();
             }
 
         }

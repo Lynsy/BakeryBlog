@@ -129,18 +129,16 @@ public class MasterListFragment extends Fragment implements RecipeAdapter.OnReci
                             }
                         });
                     } else {
-                        // TODO: lOAD FROM LOCAL DB
-                        Toast.makeText(getActivity(), "We found nothing...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.error_network, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    // TODO: LOAD FROM LOCAL DB
+                    Toast.makeText(getActivity(), R.string.error_network, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Recipe>> call, @NonNull Throwable t) {
-                // TODO: LOAD FROM LOCAL DB
-                Toast.makeText(getActivity(), "WHAT!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.error_network, Toast.LENGTH_SHORT).show();
             }
         });
     }

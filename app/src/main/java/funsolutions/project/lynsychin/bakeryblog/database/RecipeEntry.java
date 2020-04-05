@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.List;
 
 import funsolutions.project.lynsychin.bakeryblog.network.model.Ingredient;
@@ -11,7 +12,7 @@ import funsolutions.project.lynsychin.bakeryblog.network.model.Recipe;
 import funsolutions.project.lynsychin.bakeryblog.network.model.Step;
 
 @Entity(tableName = "recipe")
-public class RecipeEntry {
+public class RecipeEntry implements Serializable {
 
     @PrimaryKey
     Integer id;

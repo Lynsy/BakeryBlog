@@ -7,12 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +14,6 @@ import funsolutions.project.lynsychin.bakeryblog.database.RecipeDatabase;
 import funsolutions.project.lynsychin.bakeryblog.database.RecipeEntry;
 import funsolutions.project.lynsychin.bakeryblog.helper.AppExecutors;
 import funsolutions.project.lynsychin.bakeryblog.network.model.Ingredient;
-import funsolutions.project.lynsychin.bakeryblog.viewmodel.RecipeViewModel;
-import funsolutions.project.lynsychin.bakeryblog.viewmodel.RecipeViewModelFactory;
 
 /**
  * Implementation of App Widget functionality.
@@ -37,7 +29,6 @@ public class RecipeAppWidget extends AppWidgetProvider {
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_name, pendingIntent);
-        views.setOnClickPendingIntent(R.id.imageView, pendingIntent);
 
         RecipeDatabase db = RecipeDatabase.getInstance(context);
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -46,7 +37,15 @@ public class RecipeAppWidget extends AppWidgetProvider {
                 List<RecipeEntry> entries = db.recipeDao().getAllRecipes();
                 if(entries != null && !entries.isEmpty()){
                     RecipeEntry randomRecipe = entries.get(new Random().nextInt(entries.size()));
-                    views.setTextViewText(R.id.appwidget_name, context.getString(R.string.lbl_today_bake, randomRecipe.getName()));
+                    StringBuilder fullIngredients = new StringBuilder(randomRecipe.getName() + "\n\nIngredients\n");
+                    for(Ingredient ingredient : randomRecipe.getIngredients()){
+                        fullIngredients.append(context.getString(R.string.list_ingredients,
+                                String.valueOf(ingredient.getQuantity()),
+                                ingredient.getMeasure(),
+                                ingredient.getIngredient()));
+                    }
+
+                    views.setTextViewText(R.id.appwidget_name, fullIngredients);
                 } else {
                     views.setTextViewText(R.id.appwidget_name, context.getString(R.string.lbl_check_new_recipe_in_app));
                 }
