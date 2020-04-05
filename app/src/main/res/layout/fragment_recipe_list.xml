@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg"
+    >
+
+
+    <ImageView
+        android:id="@+id/iconCupcake"
+        android:layout_width="25dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_cupcake_colored"
+        android:contentDescription="@string/img_content_description_1"
+        />
+
+    <TextView
+        android:id="@+id/lblAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/app_name"
+        style="@style/mainHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconCupcake" />
+
+    <EditText
+        android:id="@+id/etSearchRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="42dp"
+        android:background="@drawable/bg_rounded_white"
+        android:ems="10"
+        android:hint="@string/hint_search_recipe"
+        android:inputType="textPersonName"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="10dp"
+        style="@style/searchEntry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblAppName"
+        android:autofillHints="false"
+        />
+
+    <ImageView
+        android:id="@+id/iconSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etSearchRecipe"
+        app:layout_constraintEnd_toEndOf="@+id/etSearchRecipe"
+        app:layout_constraintTop_toTopOf="@+id/etSearchRecipe"
+        app:srcCompat="@drawable/ic_search"
+        android:contentDescription="@string/img_content_description_2"
+        />
+
+    <ImageView
+        android:id="@+id/iconWhisk"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/img_content_description_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchRecipe"
+        app:srcCompat="@drawable/ic_whisk" />
+
+    <TextView
+        android:id="@+id/lblRecipeHeader"
+        style="@style/subHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/lbl_popular_recipes"
+        app:layout_constraintBottom_toBottomOf="@+id/iconWhisk"
+        app:layout_constraintStart_toEndOf="@+id/iconWhisk"
+        app:layout_constraintTop_toTopOf="@+id/iconWhisk" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRecipesList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="36dp"
+        android:paddingEnd="36dp"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_bakery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconWhisk"
+        app:layout_constraintHeight_default="spread"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

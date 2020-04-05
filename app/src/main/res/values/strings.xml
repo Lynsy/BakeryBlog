@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Bakery Blog</string>
+    <string name="img_content_description_1">This is an icon cupcake</string>
+    <string name="img_content_description_2">This is an icon search magnifier</string>
+    <string name="img_content_description_3">This is an icon whisk</string>
+    <string name="hint_search_recipe">Search Recipe…</string>
+    <string name="lbl_popular_recipes">Popular Recipes</string>
+    <string name="item_img_content_description_1">Recipe\'s Image</string>
+    <string name="content_description_detail_image">This is the image of the recipe</string>
+    <string name="content_description_nav_up">This is the navigation back arrow button</string>
+    <string name="lbl_serving">%d Servings</string>
+    <string name="lbl_directions">Directions</string>
+    <string name="lbl_ingredients">Ingredients</string>
+    <string name="bullet">\u2022</string>
+    <string name="list_ingredients">%s %s of %s</string>
+
+    <string name="ph_description_short">Mix together dry ingredients.</string>
+    <string name="ph_description">5. Crack 3 eggs into the chocolate mixture and carefully fold them in. Crack the other 2 eggs in and carefully fold them in. Fold in the vanilla.</string>
+    <string name="lbl_view_in_media">View FullScreen</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="lbl_check_new_recipe_in_app">Check new Recipes in App!</string>
+    <string name="lbl_today_bake">Today\'s a good day to bake %s!</string>
+</resources>
