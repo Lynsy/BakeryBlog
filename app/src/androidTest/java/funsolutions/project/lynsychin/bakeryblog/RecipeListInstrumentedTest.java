@@ -2,7 +2,7 @@ package funsolutions.project.lynsychin.bakeryblog;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.Espresso;
-//import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -25,10 +25,10 @@ public class RecipeListInstrumentedTest {
 
     @Test
     public void performClickOnRecyclerView() {
-//        Espresso.onView(ViewMatchers.withId(R.id.rvRecipesList))
-//                .inRoot(RootMatchers.withDecorView(
-//                        Matchers.is(mActivityTestRule.getActivity().getWindow().getDecorView())))
-//                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        Espresso.onView(ViewMatchers.withId(R.id.rvRecipesList))
+                .inRoot(RootMatchers.withDecorView(
+                        Matchers.is(mActivityTestRule.getActivity().getWindow().getDecorView())))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }
 
     @Test
@@ -38,10 +38,10 @@ public class RecipeListInstrumentedTest {
         int itemCount = recyclerView.getAdapter().getItemCount();
 
         // Scroll to end of page with position
-//        Espresso.onView(ViewMatchers.withId(R.id.rvRecipesList))
-//                .inRoot(RootMatchers.withDecorView(
-//                        Matchers.is(mActivityTestRule.getActivity().getWindow().getDecorView())))
-//                .perform(RecyclerViewActions.scrollToPosition(itemCount - 1));
+        Espresso.onView(ViewMatchers.withId(R.id.rvRecipesList))
+                .inRoot(RootMatchers.withDecorView(
+                        Matchers.is(mActivityTestRule.getActivity().getWindow().getDecorView())))
+                .perform(RecyclerViewActions.scrollToPosition(itemCount - 1));
     }
 
 }
